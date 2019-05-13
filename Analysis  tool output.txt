@@ -1,0 +1,21 @@
+
+Log analysis report output
+
+1.Three of the most popular articles of all time:
+
+  Candidate-is-jerk: 338647 Views
+  Bears-love-berries: 253801 Views
+  Bad-things-gone: 170098 Views
+
+
+2.Most popular article authors of all time:
+
+  Ursula La Multa: 507594 Veiws
+  Rudolf von Treppenwitz: 423457 Veiws
+  Anonymous Contributor: 170098 Veiws
+  Markoff Chaney: 84557 Veiws
+
+
+3.More than one percent of requests lead to errors was on:
+
+  Jul/17/2016 - 2.26 errors

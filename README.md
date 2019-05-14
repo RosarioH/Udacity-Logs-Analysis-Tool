@@ -1,5 +1,3 @@
-# Logs Analysis Project
-
 ### By Hector Rosario
 
 Logs Analysis Project, part of the Udacity
@@ -31,7 +29,8 @@ This project consists of the following files:
 
 * `analysis_reporting_tool.py` - The Python program that connects to the PostgreSQL
   database, executes the SQL queries and displays the results.
-* `README.md` - This read me file.
+* `Analysis  tool output.txt`- Plain text file that is a copy of what your program printed out.
+* `README.md` - Read me file.
 
 ## How to Run the Project
 Download the project zip file to your computer and unzip the file. Or clone this
@@ -65,14 +64,6 @@ Once inside the VM, navigate to the tournament directory with this command:
 
 ```bash
 cd /vagrant
-```
-
-### Load the logs into the database
-
-Then run the following command to load the logs into the database:
-
-```bash
-psql -d news -f newsdata.sql
 ```
 
 ### Running the reporting tool

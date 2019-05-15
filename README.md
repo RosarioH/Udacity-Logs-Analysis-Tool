@@ -1,7 +1,8 @@
-### By Hector Rosario
+﻿
+# Logs Analysis Project 
+part of the Udacity [Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).
 
-Logs Analysis Project, part of the Udacity
-[Full Stack Web Developer Nanodegree](https://www.udacity.com/course/full-stack-web-developer-nanodegree--nd004).
+### By Hector Rosario
 
 ## Project purpose
 To write SQL queries to answer the following questions about a PostgreSQL
@@ -43,11 +44,25 @@ repository to your desktop.
 You will need to unzip this file after downloading it. The file inside is called newsdata.sql.
 Put this file into the vagrant directory, which is shared with your virtual machine.
 
+### Download the data
+You will need to unzip newsdata.zip file after downloading it. The file inside is called newsdata.sql.
+Put this file into the vagrant directory, which is shared with your virtual machine.
+
+To load the data, cd into the vagrant directory and use the command `psql -d news -f newsdata.sql`.
+Here's what this command does:
+
+* `psql` — the PostgreSQL command line program
+* `-d news` — connect to the database named news which has been set up for you
+* `-f newsdata.sql` — run the SQL statements in the file newsdata.sql
+
+Running this command will connect to your installed database server and
+execute the SQL commands in the downloaded file, creating tables and populating them with data. 
+
+### Bringing the VM up
+
 Open the text-based interface for your operating system (e.g. the terminal
 window in Linux, the command prompt in Windows) and navigate to the project
 directory.
-
-### Bringing the VM up
 Bring up the VM with the following command:
 
 ```bash

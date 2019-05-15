@@ -29,12 +29,19 @@ This project consists of the following files:
 
 * `analysis_reporting_tool.py` - The Python program that connects to the PostgreSQL
   database, executes the SQL queries and displays the results.
+* `newsdata.zip` - SQL News data that you'll be connecting to.
 * `Analysis  tool output.txt`- Plain text file that is a copy of what your program printed out.
 * `README.md` - Read me file.
 
 ## How to Run the Project
+
 Download the project zip file to your computer and unzip the file. Or clone this
 repository to your desktop.
+
+### Dowmload the data
+
+You will need to unzip this file after downloading it. The file inside is called newsdata.sql.
+Put this file into the vagrant directory, which is shared with your virtual machine.
 
 Open the text-based interface for your operating system (e.g. the terminal
 window in Linux, the command prompt in Windows) and navigate to the project

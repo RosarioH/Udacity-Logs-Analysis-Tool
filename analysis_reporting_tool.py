@@ -12,9 +12,11 @@ def fetch_all(query):
 
 
 def top_three_articles():
-    article_query =
-    """select substr(path,10) as Article, count(*) as views from log
-    where path !='/' group by path order by views desc limit 3;
+    article_query = """
+    SELECT articles.title, count(*)
+    FROM log, arctiles
+    WHERE log.path = concat('/article/',articles.slug)
+    GROUP BY articles.title ORDER BY count(*) DESC limit 3;
     """
     result = fetch_all(article_query)
     output = '  %s: %s Views\n'
@@ -26,31 +28,31 @@ def top_three_articles():
 
 
 def top_authors():
-    article_query =
-    """select authors.name as Authors, count(*) as Views from log,
-    articles, authors where log.path ='/article/' || articles.slug
-    and articles.author = authors.id
-    group by authors.name order by count(*) desc;
+    article_query = """
+    Select authors.name AS authors, count(*) AS views FROM log,
+    articles, authors WHERE log.path = concat('/article/', articles.slug)
+    AND articles.author = authors.id
+    GROUP BY authors.name ORDER BY count(*) DESC;
     """
     result = fetch_all(article_query)
     output = '  %s: %s Veiws\n'
-    top_authors =
-    "".join(output % (Authors, Views) for Authors, Views in result)
+    top_authors = "".join(
+        output % (Authors, Views) for Authors, Views in result)
     print("\n2.Most popular article authors of all time:\n ")
     print(top_authors)
 
 
 def percentage_error():
-    error_query =
-    '''WITH status_errors as (select date(time) as date,count(status)
-    as errors from log where status like '%404%' group by date), status_ok
-    as (select date(time) as date, count(status) as status_200 from
-    log where status like '%200%' group by date), percentage_error as
-    (select status_errors.date, cast(float8(sum(status_errors.errors)/
-    (sum(status_errors.errors) + sum(status_ok.status_200)))*100 as numeric)
-    as all_errors from status_errors full join status_ok on status_errors.date
-    = status_ok.date group by status_errors.date order by all_errors desc)
-    select * from percentage_error where all_errors >=1;'''
+    error_query = '''
+    WITH status_errors AS (select date(time) AS date,count(status)
+    AS errors FROM log WHERE status LIKE '%404%' GROUP BY date), status_ok
+    AS (SELECT date(time) AS date, count(status) AS status_200 FROM
+    log WHERE status LIKE '%200%' GROUP BY date), percentage_error AS
+    (SELECT status_errors.date, cast(float8(sum(status_errors.errors)/
+    (sum(status_errors.errors) + sum(status_ok.status_200)))*100 AS numeric)
+    AS all_errors FROM status_errors FULL JOIN status_ok on status_errors.date
+    = status_ok.date GROUP BY status_errors.date ORDER BY all_errors DESC)
+    SELECT * FROM percentage_error WHERE all_errors >=1;'''
     result = fetch_all(error_query)
     view = '  %s - %s errors\n'
     error = "".join(
@@ -61,9 +63,14 @@ def percentage_error():
 
 
 def main():
-    top_three_articles()
-    top_authors()
-    percentage_error()
+    try:
+        top_three_articles()
+        top_authors()
+        percentage_error()
+    except psycopg2.DatabaseError:
+        print("Failed to connect to PostgreSQL Database.")
+    except Exception:
+        print("Sorry an Unknown error has occurred.")
 
 
 main()
